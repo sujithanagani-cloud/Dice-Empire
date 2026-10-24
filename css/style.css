@@ -125,3 +125,33 @@ select:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
+.history {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #465172;
+    text-align: left;
+}
+
+.history h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+#historyEmpty {
+    color: #bac3d5;
+}
+
+#historyList {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#historyList li {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #101426;
+    overflow-wrap: anywhere;
+}

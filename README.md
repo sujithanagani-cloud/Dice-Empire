@@ -14,10 +14,13 @@ faces and a layout that works on both phones and computers.
 - Fit the dice layout to the available screen width
 - Shake the dice briefly before displaying each result
 - Prevent overlapping rolls by disabling controls during the animation
+- Show the last 10 rolls, with the newest result first
+- Keep previous results when switching between one and two dice
+Roll history is stored during the current page session and resets
+when the page is refreshed.
 
 ## Features I plan to add
 
-- History of the last 10 rolls
 - Different dice types: d4, d8, d12 and d20
 - Roll sound with a mute option
 - Dark and light themes

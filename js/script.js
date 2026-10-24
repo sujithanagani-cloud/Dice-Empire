@@ -2,7 +2,11 @@ const rollButton = document.getElementById("rollButton");
 const diceCount = document.getElementById("diceCount");
 const diceContainer = document.getElementById("diceContainer");
 const result = document.getElementById("result");
+const historyList = document.getElementById("historyList");
+const historyEmpty = document.getElementById("historyEmpty");
 
+const rollHistory = [];
+let rollNumber = 0;
 const dicePatterns = [
     [],
     [4],
@@ -51,7 +55,40 @@ function createDice() {
 
     result.textContent = "Click the button to roll.";
 }
+function addToHistory(rolls, total) {
+    rollNumber++;
 
+    const entry = {
+        number: rollNumber,
+        values: rolls,
+        total: total
+    };
+
+    rollHistory.unshift(entry);
+
+    if (rollHistory.length > 10) {
+        rollHistory.pop();
+    }
+
+    historyEmpty.hidden = true;
+    historyList.replaceChildren();
+
+    for (let i = 0; i < rollHistory.length; i++) {
+        const record = rollHistory[i];
+        const item = document.createElement("li");
+
+        if (record.values.length === 1) {
+            item.textContent =
+                "Roll " + record.number + ": " + record.values[0];
+        } else {
+            item.textContent =
+                "Roll " + record.number + ": " +
+                record.values.join(" + ") + " = " + record.total;
+        }
+
+        historyList.appendChild(item);
+    }
+}
 function rollDice() {
     if (rollButton.disabled) {
         return;
@@ -89,6 +126,8 @@ function rollDice() {
             result.textContent =
                 "You rolled " + rolls.join(" + ") + " = " + total + "!";
         }
+
+        addToHistory(rolls, total);
 
         rollButton.disabled = false;
         diceCount.disabled = false;
