@@ -12,10 +12,11 @@ faces and a layout that works on both phones and computers.
 - Display the results as white dice faces with dark pips
 - Show each rolled value and the total when rolling two dice
 - Fit the dice layout to the available screen width
+- Shake the dice briefly before displaying each result
+- Prevent overlapping rolls by disabling controls during the animation
 
 ## Features I plan to add
 
-- A short shake animation
 - History of the last 10 rolls
 - Different dice types: d4, d8, d12 and d20
 - Roll sound with a mute option

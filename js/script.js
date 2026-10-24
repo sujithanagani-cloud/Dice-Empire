@@ -53,24 +53,48 @@ function createDice() {
 }
 
 function rollDice() {
+    if (rollButton.disabled) {
+        return;
+    }
+
+    rollButton.disabled = true;
+    diceCount.disabled = true;
+
+    rollButton.textContent = "Rolling...";
+    result.textContent = "Rolling the dice...";
+
     const dice = diceContainer.querySelectorAll(".dice");
-    const rolls = [];
-    let total = 0;
 
     for (let i = 0; i < dice.length; i++) {
-        const roll = Math.floor(Math.random() * 6) + 1;
-
-        displayDice(dice[i], roll);
-        rolls.push(roll);
-        total += roll;
+        dice[i].classList.add("shaking");
     }
 
-    if (rolls.length === 1) {
-        result.textContent = "You rolled " + rolls[0] + "!";
-    } else {
-        result.textContent =
-            "You rolled " + rolls.join(" + ") + " = " + total + "!";
-    }
+    setTimeout(function () {
+        const rolls = [];
+        let total = 0;
+
+        for (let i = 0; i < dice.length; i++) {
+            const roll = Math.floor(Math.random() * 6) + 1;
+
+            dice[i].classList.remove("shaking");
+            displayDice(dice[i], roll);
+
+            rolls.push(roll);
+            total += roll;
+        }
+
+        if (rolls.length === 1) {
+            result.textContent = "You rolled " + rolls[0] + "!";
+        } else {
+            result.textContent =
+                "You rolled " + rolls.join(" + ") + " = " + total + "!";
+        }
+
+        rollButton.disabled = false;
+        diceCount.disabled = false;
+
+        rollButton.textContent = "Roll Dice";
+    }, 500);
 }
 
 rollButton.addEventListener("click", rollDice);
