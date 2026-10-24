@@ -1,6 +1,6 @@
 # Dice Empire
 
-I'm building this dice rolling website for the IIT Indore Programming
+I'm building this dice rolling website
 Club induction using HTML, CSS and JavaScript.
 
 The idea is a simple dice roller with a starry background, clear dice
@@ -23,11 +23,6 @@ when the page is refreshed.
 - Include the dice type in each history entry
 - Roll sound with a mute option
 - Dark and light themes
-## Next improvements
-
-- Finish the starry background and visual styling
-- Check the layout on different screen sizes
-- Add screenshots and publish a live demo
 
 ## Tech stack
 
