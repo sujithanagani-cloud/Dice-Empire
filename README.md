@@ -22,10 +22,12 @@ when the page is refreshed.
 - Show pips for d6 and numbered shapes for other dice types
 - Include the dice type in each history entry
 - Roll sound with a mute option
-
-## Features I plan to add
-
 - Dark and light themes
+## Next improvements
+
+- Finish the starry background and visual styling
+- Check the layout on different screen sizes
+- Add screenshots and publish a live demo
 
 ## Tech stack
 

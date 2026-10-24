@@ -6,6 +6,7 @@ const result = document.getElementById("result");
 const historyList = document.getElementById("historyList");
 const historyEmpty = document.getElementById("historyEmpty");
 const muteButton = document.getElementById("muteButton");
+const themeButton = document.getElementById("themeButton");
 
 let isMuted = false;
 let audioContext = null;
@@ -187,6 +188,20 @@ function toggleMute() {
         );
     }
 }
+function toggleTheme() {
+    const isLightTheme = document.body.classList.toggle("light-theme");
+
+    if (isLightTheme) {
+        themeButton.textContent = "Use dark theme";
+    } else {
+        themeButton.textContent = "Use light theme";
+    }
+
+    themeButton.setAttribute(
+        "aria-pressed",
+        String(isLightTheme)
+    );
+}
 function rollDice() {
     if (rollButton.disabled) {
         return;
@@ -242,5 +257,5 @@ rollButton.addEventListener("click", rollDice);
 diceCount.addEventListener("change", createDice);
 diceType.addEventListener("change", createDice);
 muteButton.addEventListener("click", toggleMute);
-
+themeButton.addEventListener("click", toggleTheme);
 createDice();

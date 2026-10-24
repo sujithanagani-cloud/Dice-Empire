@@ -1,3 +1,36 @@
+:root {
+    color-scheme: dark;
+
+    --page-bg: #101426;
+    --panel-bg: #1b223b;
+    --text-color: #f5f7ff;
+    --muted-color: #bac3d5;
+    --border-color: #465172;
+    --accent-color: #8db5ff;
+    --accent-hover: #b3ceff;
+    --button-text: #101426;
+    --settings-hover: #303b5a;
+    --input-bg: #ffffff;
+    --input-text: #172033;
+    --focus-color: #8db5ff;
+}
+
+body.light-theme {
+    color-scheme: light;
+
+    --page-bg: #edf2fc;
+    --panel-bg: #ffffff;
+    --text-color: #172033;
+    --muted-color: #526078;
+    --border-color: #c1cce0;
+    --accent-color: #315bd6;
+    --accent-hover: #2446ae;
+    --button-text: #ffffff;
+    --settings-hover: #e8eefb;
+    --input-bg: #f5f7fc;
+    --input-text: #172033;
+    --focus-color: #315bd6;
+}
 * {
     box-sizing: border-box;
 }
@@ -8,8 +41,8 @@ body {
     padding: 24px;
     display: grid;
     place-items: center;
-    background: #101426;
-    color: #f5f7ff;
+    background: var(--page-bg);
+    color: var(--text-color);
     font-family: Arial, sans-serif;
 }
 
@@ -18,8 +51,8 @@ body {
     max-width: 440px;
     padding: 32px 24px;
     text-align: center;
-    background: #1b223b;
-    border: 1px solid #465172;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
 }
 
@@ -57,19 +90,19 @@ button {
     padding: 12px 28px;
     border: none;
     border-radius: 10px;
-    background: #8db5ff;
-    color: #101426;
+    background: var(--accent-color);
+    color: var(--button-text);
     font: inherit;
     font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background: #b3ceff;
+    background: var(--accent-hover);
 }
 
 button:focus-visible {
-    outline: 3px solid #ffffff;
+    outline: 3px solid var(--focus-color);
     outline-offset: 4px;
 }
 .controls {
@@ -83,15 +116,15 @@ button:focus-visible {
 
 select {
     padding: 8px 12px;
-    border: 1px solid #465172;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background: #ffffff;
-    color: #172033;
+    background: var(--input-bg);
+    color: var(--input-text);
     font: inherit;
 }
 
 select:focus-visible {
-    outline: 3px solid #8db5ff;
+    outline: 3px solid var(--focus-color);
     outline-offset: 3px;
 }
 
@@ -128,7 +161,7 @@ select:disabled {
 .history {
     margin-top: 32px;
     padding-top: 20px;
-    border-top: 1px solid #465172;
+    border-top: 1px solid var(--border-color);
     text-align: left;
 }
 
@@ -138,7 +171,7 @@ select:disabled {
 }
 
 #historyEmpty {
-    color: #bac3d5;
+    color: var(--muted-color);
 }
 
 #historyList {
@@ -152,7 +185,7 @@ select:disabled {
 #historyList li {
     padding: 10px 12px;
     border-radius: 8px;
-    background: #101426;
+    background: var(--page-bg);
     overflow-wrap: anywhere;
 }
 .dice.numbered {
@@ -200,18 +233,19 @@ select:disabled {
 .settings {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 12px;
     margin-top: 20px;
 }
 
 .settings button {
     padding: 8px 14px;
-    border: 1px solid #465172;
+    border: 1px solid var(--border-color);
     background: transparent;
-    color: #f5f7ff;
+    color: var(--text-color);
     font-size: 14px;
 }
 
 .settings button:hover {
-    background: #303b5a;
+    background: var(--settings-hover);
 }
