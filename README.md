@@ -21,10 +21,10 @@ when the page is refreshed.
 - Choose d4, d6, d8, d12 or d20 dice
 - Show pips for d6 and numbered shapes for other dice types
 - Include the dice type in each history entry
+- Roll sound with a mute option
 
 ## Features I plan to add
 
-- Roll sound with a mute option
 - Dark and light themes
 
 ## Tech stack
@@ -45,8 +45,6 @@ No build step is needed.
 
 ## How the randomness works
 
-## How the randomness works
-
 Each die uses Math.floor(Math.random() * sides) + 1, where sides
 is the selected number of sides: 4, 6, 8, 12 or 20.
 
@@ -59,3 +57,9 @@ Repeated results are normal.
 
 When rolling two dice, the calculation runs separately for each die.
 Their values are then added to calculate the total.
+
+## Sound
+
+The roll sound is generated in the browser using the Web Audio API.
+It plays four short tones during the shake, so no external audio file
+is needed. Sound can be muted using the settings button.

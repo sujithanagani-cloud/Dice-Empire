@@ -197,3 +197,21 @@ select:disabled {
         0% 50%
     );
 }
+.settings {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.settings button {
+    padding: 8px 14px;
+    border: 1px solid #465172;
+    background: transparent;
+    color: #f5f7ff;
+    font-size: 14px;
+}
+
+.settings button:hover {
+    background: #303b5a;
+}

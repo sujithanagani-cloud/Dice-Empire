@@ -5,7 +5,11 @@ const diceContainer = document.getElementById("diceContainer");
 const result = document.getElementById("result");
 const historyList = document.getElementById("historyList");
 const historyEmpty = document.getElementById("historyEmpty");
+const muteButton = document.getElementById("muteButton");
 
+let isMuted = false;
+let audioContext = null;
+let soundVolume = null;
 const rollHistory = [];
 let rollNumber = 0;
 
@@ -108,7 +112,81 @@ function addToHistory(rolls, total, sides) {
         historyList.appendChild(item);
     }
 }
+async function playRollSound() {
+    if (isMuted) {
+        return;
+    }
 
+    try {
+        if (audioContext === null) {
+            audioContext = new AudioContext();
+
+            soundVolume = audioContext.createGain();
+            soundVolume.connect(audioContext.destination);
+        }
+
+        await audioContext.resume();
+
+        if (isMuted) {
+            return;
+        }
+
+        soundVolume.gain.setValueAtTime(
+            0.12,
+            audioContext.currentTime
+        );
+
+        for (let i = 0; i < 4; i++) {
+            const tone = audioContext.createOscillator();
+            const fade = audioContext.createGain();
+
+            const startTime = audioContext.currentTime + i * 0.1;
+
+            tone.type = "triangle";
+            tone.frequency.setValueAtTime(180 + i * 40, startTime);
+
+            fade.gain.setValueAtTime(1, startTime);
+            fade.gain.exponentialRampToValueAtTime(
+                0.01,
+                startTime + 0.06
+            );
+
+            tone.connect(fade);
+            fade.connect(soundVolume);
+
+            tone.onended = function () {
+                tone.disconnect();
+                fade.disconnect();
+            };
+
+            tone.start(startTime);
+            tone.stop(startTime + 0.07);
+        }
+    } catch (error) {
+        console.warn("Roll sound could not play:", error);
+    }
+}
+
+function toggleMute() {
+    isMuted = !isMuted;
+
+    if (isMuted) {
+        muteButton.textContent = "Unmute sound";
+    } else {
+        muteButton.textContent = "Mute sound";
+    }
+
+    muteButton.setAttribute("aria-pressed", String(isMuted));
+
+    if (soundVolume !== null) {
+        const volume = isMuted ? 0 : 0.12;
+
+        soundVolume.gain.setValueAtTime(
+            volume,
+            audioContext.currentTime
+        );
+    }
+}
 function rollDice() {
     if (rollButton.disabled) {
         return;
@@ -120,7 +198,7 @@ function rollDice() {
 
     rollButton.textContent = "Rolling...";
     result.textContent = "Rolling the dice...";
-
+    playRollSound(); 
     const dice = diceContainer.querySelectorAll(".dice");
     const sides = Number(diceType.value);
 
@@ -163,5 +241,6 @@ function rollDice() {
 rollButton.addEventListener("click", rollDice);
 diceCount.addEventListener("change", createDice);
 diceType.addEventListener("change", createDice);
+muteButton.addEventListener("click", toggleMute);
 
 createDice();
