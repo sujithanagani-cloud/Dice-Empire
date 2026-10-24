@@ -1,38 +1,49 @@
 # Dice Empire
 
-A dice rolling website for the IIT Indore Programming Club induction.
+I'm building this dice rolling website for the IIT Indore Programming
+Club induction using HTML, CSS and JavaScript.
 
-## Current status
+The idea is a simple dice roller with a starry background, clear dice
+faces and a layout that works on both phones and computers.
 
-Planning and repository setup. Website implementation has not started.
+## What works so far
 
-## Planned features
+- Roll a six-sided die with a button click
+- Display the result as a white dice face with dark pips
+- Show a matching result message
 
-- Roll one or two dice and display the total
-- Show visual dice faces
-- Play a short shake animation before revealing the result
-- Support d4, d6, d8, d12 and d20
-- Display the last 10 rolls
-- Include roll sound with a mute toggle
-- Support dark and light themes
-- Work on mobile and desktop
+## Features I plan to add
 
-## Design direction
-
-A starry background with a bordered panel and clear white dice
-with dark pips.
+- A choice between one and two dice, with the total
+- A short shake animation
+- History of the last 10 rolls
+- Different dice types: d4, d8, d12 and d20
+- Roll sound with a mute option
+- Dark and light themes
 
 ## Tech stack
 
-- HTML for page structure
-- CSS for styling and animation
-- JavaScript for rolling logic and interactions
+- HTML for the page structure
+- CSS for the layout and dice appearance
+- JavaScript for random rolls and updating the page
 
-## Development approach
+## Run locally
 
-Build and understand one feature at a time.
-Test each working milestone, then commit and push it to GitHub.
+1. Download or clone this repository.
+2. Open the project folder in VS Code.
+3. Install Live Server by Ritwick Dey.
+4. Right-click index.html and select Open with Live Server.
 
-## Running the project
+You can also open index.html directly in a browser.
+No build step is needed.
 
-Run instructions will be added when the first working webpage is ready.
+## How the randomness works
+
+Each roll uses Math.floor(Math.random() * 6) + 1.
+
+Math.random() generates a value from 0 up to, but not including, 1.
+Multiplying by 6 and rounding down gives an integer from 0 to 5.
+Adding 1 gives a result from 1 to 6.
+
+Each face has approximately the same chance of appearing.
+Getting the same result on consecutive rolls is normal.

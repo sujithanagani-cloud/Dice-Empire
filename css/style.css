@@ -31,14 +31,26 @@ h1 {
     width: 110px;
     height: 110px;
     margin: 28px auto;
+    padding: 18px;
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     place-items: center;
     background: #ffffff;
-    color: #172033;
     border-radius: 16px;
     box-shadow: 0 6px 0 #bac3d5;
-    font-size: 48px;
-    font-weight: bold;
+}
+
+.pip {
+    width: 16px;
+    height: 16px;
+    background: #172033;
+    border-radius: 50%;
+    visibility: hidden;
+}
+
+.pip.visible {
+    visibility: visible;
 }
 
 button {
