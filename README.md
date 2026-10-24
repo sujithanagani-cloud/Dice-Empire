@@ -18,10 +18,12 @@ faces and a layout that works on both phones and computers.
 - Keep previous results when switching between one and two dice
 Roll history is stored during the current page session and resets
 when the page is refreshed.
+- Choose d4, d6, d8, d12 or d20 dice
+- Show pips for d6 and numbered shapes for other dice types
+- Include the dice type in each history entry
 
 ## Features I plan to add
 
-- Different dice types: d4, d8, d12 and d20
 - Roll sound with a mute option
 - Dark and light themes
 
@@ -43,12 +45,17 @@ No build step is needed.
 
 ## How the randomness works
 
-Each roll uses Math.floor(Math.random() * 6) + 1.
+## How the randomness works
+
+Each die uses Math.floor(Math.random() * sides) + 1, where sides
+is the selected number of sides: 4, 6, 8, 12 or 20.
 
 Math.random() generates a value from 0 up to, but not including, 1.
-Multiplying by 6 and rounding down gives an integer from 0 to 5.
-Adding 1 gives a result from 1 to 6.
+Multiplying by sides and rounding down gives an integer from 0 to
+sides - 1. Adding 1 gives a result from 1 to sides.
 
-Each face has approximately the same chance of appearing.
-Getting the same result on consecutive rolls is normal.
-When rolling two dice, the random calculation runs separately for each die. Their values are then added to calculate the total.
+Each outcome has approximately the same chance of appearing.
+Repeated results are normal.
+
+When rolling two dice, the calculation runs separately for each die.
+Their values are then added to calculate the total.

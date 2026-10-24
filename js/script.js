@@ -1,5 +1,6 @@
 const rollButton = document.getElementById("rollButton");
 const diceCount = document.getElementById("diceCount");
+const diceType = document.getElementById("diceType");
 const diceContainer = document.getElementById("diceContainer");
 const result = document.getElementById("result");
 const historyList = document.getElementById("historyList");
@@ -7,6 +8,7 @@ const historyEmpty = document.getElementById("historyEmpty");
 
 const rollHistory = [];
 let rollNumber = 0;
+
 const dicePatterns = [
     [],
     [4],
@@ -17,22 +19,30 @@ const dicePatterns = [
     [0, 2, 3, 5, 6, 8]
 ];
 
-function displayDice(die, value) {
-    const pips = die.querySelectorAll(".pip");
+function displayDice(die, value, sides) {
+    if (sides === 6) {
+        const pips = die.querySelectorAll(".pip");
 
-    for (let i = 0; i < pips.length; i++) {
-        pips[i].classList.remove("visible");
+        for (let i = 0; i < pips.length; i++) {
+            pips[i].classList.remove("visible");
 
-        if (dicePatterns[value].includes(i)) {
-            pips[i].classList.add("visible");
+            if (dicePatterns[value].includes(i)) {
+                pips[i].classList.add("visible");
+            }
         }
+    } else {
+        die.textContent = value;
     }
 
-    die.setAttribute("aria-label", "Die showing " + value);
+    die.setAttribute(
+        "aria-label",
+        "d" + sides + " showing " + value
+    );
 }
 
 function createDice() {
     const count = Number(diceCount.value);
+    const sides = Number(diceType.value);
 
     diceContainer.replaceChildren();
 
@@ -42,26 +52,32 @@ function createDice() {
         die.classList.add("dice");
         die.setAttribute("role", "img");
 
-        for (let j = 0; j < 9; j++) {
-            const pip = document.createElement("span");
+        if (sides === 6) {
+            for (let j = 0; j < 9; j++) {
+                const pip = document.createElement("span");
 
-            pip.classList.add("pip");
-            die.appendChild(pip);
+                pip.classList.add("pip");
+                die.appendChild(pip);
+            }
+        } else {
+            die.classList.add("numbered", "d" + sides);
         }
 
-        displayDice(die, 1);
+        displayDice(die, 1, sides);
         diceContainer.appendChild(die);
     }
 
     result.textContent = "Click the button to roll.";
 }
-function addToHistory(rolls, total) {
+
+function addToHistory(rolls, total, sides) {
     rollNumber++;
 
     const entry = {
         number: rollNumber,
         values: rolls,
-        total: total
+        total: total,
+        sides: sides
     };
 
     rollHistory.unshift(entry);
@@ -77,18 +93,22 @@ function addToHistory(rolls, total) {
         const record = rollHistory[i];
         const item = document.createElement("li");
 
+        const label =
+            "Roll " + record.number +
+            " (" + record.values.length + "d" + record.sides + "): ";
+
         if (record.values.length === 1) {
-            item.textContent =
-                "Roll " + record.number + ": " + record.values[0];
+            item.textContent = label + record.values[0];
         } else {
             item.textContent =
-                "Roll " + record.number + ": " +
-                record.values.join(" + ") + " = " + record.total;
+                label + record.values.join(" + ") +
+                " = " + record.total;
         }
 
         historyList.appendChild(item);
     }
 }
+
 function rollDice() {
     if (rollButton.disabled) {
         return;
@@ -96,11 +116,13 @@ function rollDice() {
 
     rollButton.disabled = true;
     diceCount.disabled = true;
+    diceType.disabled = true;
 
     rollButton.textContent = "Rolling...";
     result.textContent = "Rolling the dice...";
 
     const dice = diceContainer.querySelectorAll(".dice");
+    const sides = Number(diceType.value);
 
     for (let i = 0; i < dice.length; i++) {
         dice[i].classList.add("shaking");
@@ -111,10 +133,10 @@ function rollDice() {
         let total = 0;
 
         for (let i = 0; i < dice.length; i++) {
-            const roll = Math.floor(Math.random() * 6) + 1;
+            const roll = Math.floor(Math.random() * sides) + 1;
 
             dice[i].classList.remove("shaking");
-            displayDice(dice[i], roll);
+            displayDice(dice[i], roll, sides);
 
             rolls.push(roll);
             total += roll;
@@ -124,13 +146,15 @@ function rollDice() {
             result.textContent = "You rolled " + rolls[0] + "!";
         } else {
             result.textContent =
-                "You rolled " + rolls.join(" + ") + " = " + total + "!";
+                "You rolled " + rolls.join(" + ") +
+                " = " + total + "!";
         }
 
-        addToHistory(rolls, total);
+        addToHistory(rolls, total, sides);
 
         rollButton.disabled = false;
         diceCount.disabled = false;
+        diceType.disabled = false;
 
         rollButton.textContent = "Roll Dice";
     }, 500);
@@ -138,5 +162,6 @@ function rollDice() {
 
 rollButton.addEventListener("click", rollDice);
 diceCount.addEventListener("change", createDice);
+diceType.addEventListener("change", createDice);
 
 createDice();

@@ -155,3 +155,45 @@ select:disabled {
     background: #101426;
     overflow-wrap: anywhere;
 }
+.dice.numbered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #c6d8ff;
+    color: #172033;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.dice.d4 {
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    padding-top: 30px;
+}
+
+.dice.d8 {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.dice.d12 {
+    clip-path: polygon(
+        50% 0%,
+        100% 38%,
+        81% 100%,
+        19% 100%,
+        0% 38%
+    );
+}
+
+.dice.d20 {
+    clip-path: polygon(
+        25% 0%,
+        75% 0%,
+        100% 50%,
+        75% 100%,
+        25% 100%,
+        0% 50%
+    );
+}
