@@ -14,17 +14,16 @@
         <h1>Roll A Dice!</h1>
         <p>Take your chance!</p>
 
-        <div id="dice" class="dice" role="img" aria-label="Die showing 1">
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
+        <div class="controls">
+            <label for="diceCount">Number of dice:</label>
+
+            <select id="diceCount">
+                <option value="1">One die</option>
+                <option value="2">Two dice</option>
+            </select>
         </div>
+
+        <div id="diceContainer" class="dice-container"></div>
 
         <p id="result" aria-live="polite">
             Click the button to roll.

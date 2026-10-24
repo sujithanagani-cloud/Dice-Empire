@@ -8,13 +8,13 @@ faces and a layout that works on both phones and computers.
 
 ## What works so far
 
-- Roll a six-sided die with a button click
-- Display the result as a white dice face with dark pips
-- Show a matching result message
+- Choose between rolling one die or two dice
+- Display the results as white dice faces with dark pips
+- Show each rolled value and the total when rolling two dice
+- Fit the dice layout to the available screen width
 
 ## Features I plan to add
 
-- A choice between one and two dice, with the total
 - A short shake animation
 - History of the last 10 rolls
 - Different dice types: d4, d8, d12 and d20
@@ -47,3 +47,4 @@ Adding 1 gives a result from 1 to 6.
 
 Each face has approximately the same chance of appearing.
 Getting the same result on consecutive rolls is normal.
+When rolling two dice, the random calculation runs separately for each die. Their values are then added to calculate the total.
