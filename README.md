@@ -60,3 +60,7 @@ Their values are then added to calculate the total.
 The roll sound is generated in the browser using the Web Audio API.
 It plays four short tones during the shake, so no external audio file
 is needed. Sound can be muted using the settings button.
+
+## Website Vercel Link
+
+https://dice-empire-tau.vercel.app/
